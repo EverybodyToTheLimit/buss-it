@@ -507,6 +507,85 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/city_ids.js":
+/*!*************************!*\
+  !*** ./src/city_ids.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "megabusCityIds": () => (/* binding */ megabusCityIds)
+/* harmony export */ });
+let megabusCityIds = [
+    {name: "Aberdeen", id: 1},
+    {name: "Aviemore", id: 2},
+    {name: "Birmingham", id: 8},
+    {name: "Birmingham International Airport", id: 9},
+    {name: "Bournemouth", id: 11},
+    {name: "Bristol", id: 13},
+    {name: "Bristol UWE", id: 14},
+    {name: "Cardiff", id: 20},
+    {name: "Coventry", id: 27},
+    {name: "Derby", id: 30},
+    {name: "Dundee", id: 32},
+    {name: "Edinburgh", id: 34},
+    {name: "Exeter", id: 36},
+    {name: "Glasgow", id: 38},
+    {name: "Huddersfield", id: 45},
+    {name: "Hull", id: 46},
+    {name: "Inverness", id: 49},
+    {name: "Kinross", id: 51},
+    {name: "Leeds", id: 52},
+    {name: "Leicester", id: 53},
+    {name: "Liverpool", id: 54},
+    {name: "London", id: 56},
+    {name: "Loughborough", id: 57},
+    {name: "Manchester", id: 58},
+    {name: "Middlesbrough", id: 59},
+    {name: "Newcastle (upon Tyne)", id: 63},
+    {name: "Newport", id: 64},
+    {name: "Nottingham", id: 68},
+    {name: "Oxford (City Centre)", id: 71},
+    {name: "Perth", id: 75},
+    {name: "Pitlochry", id: 76},
+    {name: "Plymouth", id: 77},
+    {name: "Poole", id: 78},
+    {name: "Preston", id: 80},
+    {name: "Reading", id: 81},
+    {name: "Sheffield", id: 90},
+    {name: "Sunderland", id: 96},
+    {name: "Swansea", id: 97},
+    {name: "Taunton", id: 100},
+    {name: "Lancaster", id: 116},
+    {name: "Halbeath Interchange", id: 138},
+    {name: "Cullompton", id: 152},
+    {name: "Northampton", id: 166},
+    {name: "Bridgwater", id: 183},
+    {name: "Bristol Airport", id: 249},
+    {name: "Cardiff University", id: 259},
+    {name: "Heathrow Airport T2 & T3 (also T4 & T5 via Shuttle)", id: 265},
+    {name: "Manchester Airport", id: 278},
+    {name: "Luton Airport", id: 320},
+    {name: "Wellington", id: 363},
+    {name: "Nottingham University", id: 373},
+    {name: "Stansted Airport", id: 385},
+    {name: "Oxford (Thornhill)", id: 389},
+    {name: "Mansfield / Alfreton", id: 401},
+    {name: "Newcastle under Lyme", id: 403},
+    {name: "Hull University", id: 404},
+    {name: "Goole", id: 405},
+    {name: "Bournemouth University", id: 416},
+    {name: "Abington", id: 446},
+    {name: "Dunbar", id: 447},
+    {name: "Haggerston Castle", id: 448},
+
+];
+
+
+
+/***/ }),
+
 /***/ "./src/dom_elements.js":
 /*!*****************************!*\
   !*** ./src/dom_elements.js ***!
@@ -541,12 +620,12 @@ let searchSection = () => {
     let origInput = document.createElement('input');
     origInput.name = "origin"
     origInput.type = "text"
-    origInput.placeholder = "Where are your travelling from?"
+    origInput.placeholder = "travelling from"
     origInput.required = true;
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
-    destInput.placeholder = "Where are you going to?"
+    destInput.placeholder = "travelling to"
     destInput.required = true;
     let travelDate = document.createElement('input');
     travelDate.name = "date"
@@ -570,9 +649,7 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log("here")
     let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery)(origInput.value, destInput.value, travelDate.value)
-    console.log(result)
 })
 }
 
@@ -622,31 +699,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "megabusQuery": () => (/* binding */ megabusQuery)
 /* harmony export */ });
+/* harmony import */ var _city_ids__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./city_ids */ "./src/city_ids.js");
+
+
+function transform(str) {
+    let data = str.split('\n').map(i=>i.split(','));
+    let headers = data.shift();
+    let output = data.map(d=>{obj = {};headers.map((h,i)=>obj[headers[i]] = d[i]);return obj;});
+    console.log(output);
+  }
+
 let megabusQuery = async (originCity, destCity, date) => {
    try {
     // map city names to Megabus codes from array
-    originCity = megabusCityIds.find(item => item.name === originCity).id
-    destCity = megabusCityIds.find(item => item.name === destCity).id
+    originCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.find(item => item.name === originCity).id
+    destCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.find(item => item.name === destCity).id
     // build main API connection string
-    let result = await fetch("https://uk.megabus.com/journey-planner/journeys?days=1&concessionCount=0&departureDate="+ date +"&destinationId="+destCity+"&inboundOtherDisabilityCount=0&inboundPcaCount=0&inboundWheelchairSeated=0&nusCount=0&originId="+originCity+"&otherDisabilityCount=0&pcaCount=0&totalPassengers=1", {mode: 'cors'})
-        .then(function(response) {
-        console.log(response);
-      })
+    let result = await fetch("https://proxy.cors.sh/https://uk.megabus.com/journey-planner/api/journeys?days=1&concessionCount=0&departureDate="+ date +"&destinationId="+destCity+"&inboundOtherDisabilityCount=0&inboundPcaCount=0&inboundWheelchairSeated=0&nusCount=0&originId="+originCity+"&otherDisabilityCount=0&pcaCount=0&totalPassengers=1", {
+        headers: {
+          'x-cors-api-key': 'temp_cf1616c81b1fb0a232d4a95971a6aec7',
+        }
+        })
+        .then(async response => {
+            let text = await response.json();
+            console.log(text)
+            // console.log('{name: "' + text.journeys[0].destination.cityName + '", id: ' + text.journeys[0].destination.cityId + '},')
+        
+        })
    }
    catch (err) {
     console.log(err)
    }
 }
 
-let validateMEgabusInput = (originCity, destCity, date) => {
+// let getAllCodes = async () => {
+//     let i = 0;
+//     for (i=449; i<600; i++) {
+//         await megabusQuery(56, i, "2023-01-25")
+//         setTimeout(10000)
+//     }
+// }
+
+let validateMegabusInput = (originCity, destCity, date) => {
     //add calidation steps, date cannot be in the past, format date with datefns yyyy-mm-dd
 
 }
 
-let megabusCityIds = [
-    {name: "bristol", id: 13},
-    {name: "plymouth", id: 77}
-];
 
 
 
@@ -738,10 +836,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom_elements */ "./src/dom_elements.js");
 
 
+// import { getAllCodes } from "./megabus_connector";
+
 
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.staticElements)();
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.searchSection)();
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.resultSection)();
+
+// const axios = require("axios");
+
+// const options = {
+//   method: 'GET',
+//   url: 'https://flixbus.p.rapidapi.com/v1/search-trips',
+//   params: {
+//     to_id: '1374',
+//     from_id: '88',
+//     currency: 'EUR',
+//     departure_date: '2023-01-26',
+//     number_adult: '1',
+//     search_by: 'cities'
+//   },
+//   headers: {
+//     'X-RapidAPI-Key': 'ec8a7d85e9mshb5b0c38b432f808p1681d0jsndbbffac7fb50',
+//     'X-RapidAPI-Host': 'flixbus.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
 })();
 
 /******/ })()

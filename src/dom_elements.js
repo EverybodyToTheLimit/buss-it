@@ -18,12 +18,12 @@ let searchSection = () => {
     let origInput = document.createElement('input');
     origInput.name = "origin"
     origInput.type = "text"
-    origInput.placeholder = "Where are your travelling from?"
+    origInput.placeholder = "travelling from"
     origInput.required = true;
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
-    destInput.placeholder = "Where are you going to?"
+    destInput.placeholder = "travelling to"
     destInput.required = true;
     let travelDate = document.createElement('input');
     travelDate.name = "date"
@@ -47,9 +47,7 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log("here")
     let result = megabusQuery(origInput.value, destInput.value, travelDate.value)
-    console.log(result)
 })
 }
 
