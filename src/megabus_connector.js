@@ -8,6 +8,7 @@ function transform(str) {
   }
 
 let megabusQuery = async (originCity, destCity, date) => {
+    let megabusResult = [];
    try {
     // map city names to Megabus codes from array
     originCity = megabusCityIds.find(item => item.name === originCity).id
@@ -20,9 +21,23 @@ let megabusQuery = async (originCity, destCity, date) => {
         })
         .then(async response => {
             let text = await response.json();
-            console.log(text)
-            // console.log('{name: "' + text.journeys[0].destination.cityName + '", id: ' + text.journeys[0].destination.cityId + '},')
-        
+            for (let i=1; i<text.journeys.length; i++) {
+                let obj = text.journeys[i]
+                let resultEntry = {
+                    "id": obj.journeyId,
+                    "departureTime": obj.departureDateTime,
+                    "arrivalTime": obj.arrivalDateTime,
+                    "originCity": obj.origin.cityName,
+                    "origin": obj.origin.stopName,
+                    "destinationCity": obj.destination.cityName,
+                    "destination": obj.destination.stopName,
+                    "duration": obj.duration,
+                    "price": obj.price
+                }
+                megabusResult.push(resultEntry)
+            }
+            console.log(megabusResult)
+            return megabusResult;
         })
    }
    catch (err) {
