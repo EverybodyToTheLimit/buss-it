@@ -515,6 +515,7 @@ module.exports = styleTagTransform;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "flixbusCityIds": () => (/* binding */ flixbusCityIds),
 /* harmony export */   "megabusCityIds": () => (/* binding */ megabusCityIds)
 /* harmony export */ });
 let megabusCityIds = [
@@ -581,6 +582,31 @@ let megabusCityIds = [
     {name: "Haggerston Castle", id: 448},
 
 ];
+let flixbusCityIds = [
+{name: "Birmingham", id: 14668},
+{name: "Bradford", id: 46591},
+{name: "Bridgend", id: 47351},
+{name: "Bristol", id: 43131},
+{name: "Cardiff", id: 46691},
+{name: "Chester", id: 47961},
+{name: "Derby", id: 46571},
+{name: "Leeds", id: 43121},
+{name: "Leicester", id: 46541},
+{name: "Liverpool", id: 14688},
+{name: "London", id: 3848},
+{name: "London Heathrow", id: 47891},
+{name: "Loughborough", id: 46721},
+{name: "Manchester", id: 14638},
+{name: "Newport (South Wales)", id: 47361},
+{name: "Northampton", id: 14728},
+{name: "Nottingham", id: 46581},
+{name: "Sheffield", id: 43141},
+{name: "Stoke on Trent", id: 14748},
+{name: "Swansea", id: 46681},
+{name: "Warrington", id: 47971},
+{name: "York", id: 46621},
+]
+
 
 
 
@@ -599,7 +625,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticElements": () => (/* binding */ staticElements)
 /* harmony export */ });
 /* harmony import */ var _src_event_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/event_handler */ "./src/event_handler.js");
-/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
+/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+
 
 
 
@@ -649,7 +677,8 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery)(origInput.value, destInput.value, travelDate.value)
+    let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_2__.megabusQuery)(origInput.value, destInput.value, travelDate.value);
+    let resultFlixbus = (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_1__.flixbusQuery) (origInput.value, destInput.value, travelDate.value);
 })
 }
 
@@ -675,13 +704,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "clickHandler": () => (/* binding */ clickHandler)
 /* harmony export */ });
-/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
+/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+
 
 
 let clickHandler = async (clickOrigin, origin, destination, date) => {
     if (clickOrigin == "search") {
-    let result = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_0__.megabusQuery) (origin, destination, date)
-    return result
+    let resultMegabus = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery) (origin, destination, date)
+    let resultFlixbus = await (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_0__.flixbusQuery) (origin, destination, date)
+    return {
+        resultMegabus,
+        resultFlixbus
+    }
     }
 }
 
@@ -697,21 +732,26 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "flixbusQuery": () => (/* binding */ flixbusQuery),
-/* harmony export */   "getFlixCities": () => (/* binding */ getFlixCities)
+/* harmony export */   "flixbusQuery": () => (/* binding */ flixbusQuery)
 /* harmony export */ });
+/* harmony import */ var _city_ids__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./city_ids */ "./src/city_ids.js");
+
+
+
 let flixbusQuery = async (originCity, destCity, date) => {
 
+        originCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.find(item => item.name === originCity).id
+        destCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.find(item => item.name === destCity).id
         const axios = __webpack_require__(/*! axios */ "./node_modules/axios/dist/browser/axios.cjs");
 
         const options = {
         method: 'GET',
         url: 'https://flixbus.p.rapidapi.com/v1/search-trips',
         params: {
-            to_id: '1374',
-            from_id: '88',
-            currency: 'EUR',
-            departure_date: '2023-01-26',
+            to_id: destCity,
+            from_id: originCity,
+            currency: 'GBP',
+            departure_date: date,
             number_adult: '1',
             search_by: 'cities'
         },
@@ -723,36 +763,54 @@ let flixbusQuery = async (originCity, destCity, date) => {
 
         axios.request(options).then(function (response) {
             console.log(response.data);
+            
+
+            // for (let i=1; i<response.data.length; i++) {
+            //     let obj = response.data[i]
+            //     let resultEntry = {
+            //         "id": obj.departure.timestamp,
+            //         "departureTime": obj.departureDateTime,
+            //         "arrivalTime": obj.arrivalDateTime,
+            //         "originCity": obj.origin.cityName,
+            //         "origin": obj.origin.stopName,
+            //         "destinationCity": obj.destination.cityName,
+            //         "destination": obj.destination.stopName,
+            //         "duration": obj.duration,
+            //         "price": obj.price
+            //     }}
+
         }).catch(function (error) {
             console.error(error);
         })
 
 };
 
-let getFlixCities = async () => {
-    const axios = __webpack_require__(/*! axios */ "./node_modules/axios/dist/browser/axios.cjs");
+// one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 
 
-    const options = {
-    method: 'GET',
-    url: 'https://flixbus.p.rapidapi.com/v1/cities',
-    headers: {
-        'X-RapidAPI-Key': 'ec8a7d85e9mshb5b0c38b432f808p1681d0jsndbbffac7fb50',
-        'X-RapidAPI-Host': 'flixbus.p.rapidapi.com'
-    }
-    };
+// let getFlixCities = async () => {
+//     const axios = require("axios");
 
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-        for (let i=1; i<response.data.length; i++) {
-            if (response.data[i].country.name === "United Kingdom") {
-                console.log('{name: "' + response.data[i].name + '", id: ' + response.data[i].id)
-            }
-        }
+//     const options = {
+//     method: 'GET',
+//     url: 'https://flixbus.p.rapidapi.com/v1/cities',
+//     headers: {
+//         'X-RapidAPI-Key': 'ec8a7d85e9mshb5b0c38b432f808p1681d0jsndbbffac7fb50',
+//         'X-RapidAPI-Host': 'flixbus.p.rapidapi.com'
+//     }
+//     };
 
-    }).catch(function (error) {
-        console.error(error);
-    });
-}
+//     axios.request(options).then(function (response) {
+//         console.log(response.data);
+//         for (let i=1; i<response.data.length; i++) {
+//             if (response.data[i].country.name === "United Kingdom") {
+//                 console.log('{name: "' + response.data[i].name + '", id: ' + response.data[i].id +'},')
+//             }
+//         }
+
+//     }).catch(function (error) {
+//         console.error(error);
+//     });
+// }
 
 
 
@@ -771,12 +829,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _city_ids__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./city_ids */ "./src/city_ids.js");
 
 
-function transform(str) {
-    let data = str.split('\n').map(i=>i.split(','));
-    let headers = data.shift();
-    let output = data.map(d=>{obj = {};headers.map((h,i)=>obj[headers[i]] = d[i]);return obj;});
-    console.log(output);
-  }
 
 let megabusQuery = async (originCity, destCity, date) => {
     let megabusResult = [];
@@ -815,6 +867,9 @@ let megabusQuery = async (originCity, destCity, date) => {
     console.log(err)
    }
 }
+
+
+// one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 
 
 // let getAllCodes = async () => {
 //     let i = 0;
@@ -4095,8 +4150,6 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/styles.css */ "./src/styles.css");
 /* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom_elements */ "./src/dom_elements.js");
-/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
-
 
 
 
@@ -4105,7 +4158,6 @@ __webpack_require__.r(__webpack_exports__);
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.staticElements)();
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.searchSection)();
 (0,_dom_elements__WEBPACK_IMPORTED_MODULE_1__.resultSection)();
-(0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_2__.getFlixCities)();
 
 })();
 
