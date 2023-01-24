@@ -1,11 +1,5 @@
 import { megabusCityIds } from "./city_ids";
 
-function transform(str) {
-    let data = str.split('\n').map(i=>i.split(','));
-    let headers = data.shift();
-    let output = data.map(d=>{obj = {};headers.map((h,i)=>obj[headers[i]] = d[i]);return obj;});
-    console.log(output);
-  }
 
 let megabusQuery = async (originCity, destCity, date) => {
     let megabusResult = [];
@@ -44,6 +38,9 @@ let megabusQuery = async (originCity, destCity, date) => {
     console.log(err)
    }
 }
+
+
+// one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 
 
 // let getAllCodes = async () => {
 //     let i = 0;

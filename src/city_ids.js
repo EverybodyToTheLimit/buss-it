@@ -62,5 +62,33 @@ let megabusCityIds = [
     {name: "Haggerston Castle", id: 448},
 
 ];
+let flixbusCityIds = [
+{name: "Birmingham", id: 14668},
+{name: "Bradford", id: 46591},
+{name: "Bridgend", id: 47351},
+{name: "Bristol", id: 43131},
+{name: "Cardiff", id: 46691},
+{name: "Chester", id: 47961},
+{name: "Derby", id: 46571},
+{name: "Leeds", id: 43121},
+{name: "Leicester", id: 46541},
+{name: "Liverpool", id: 14688},
+{name: "London", id: 3848},
+{name: "London Heathrow", id: 47891},
+{name: "Loughborough", id: 46721},
+{name: "Manchester", id: 14638},
+{name: "Newport (South Wales)", id: 47361},
+{name: "Northampton", id: 14728},
+{name: "Nottingham", id: 46581},
+{name: "Sheffield", id: 43141},
+{name: "Stoke on Trent", id: 14748},
+{name: "Swansea", id: 46681},
+{name: "Warrington", id: 47971},
+{name: "York", id: 46621},
+]
 
-export {megabusCityIds}
+
+export {    
+    megabusCityIds,
+    flixbusCityIds
+}

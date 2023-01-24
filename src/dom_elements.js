@@ -1,4 +1,5 @@
 import { clickHandler } from "../src/event_handler";
+import { flixbusQuery } from "./flixbus_connector";
 import { megabusQuery } from "./megabus_connector";
 
 let staticElements = () => {
@@ -47,7 +48,8 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let result = megabusQuery(origInput.value, destInput.value, travelDate.value)
+    let result = megabusQuery(origInput.value, destInput.value, travelDate.value);
+    let resultFlixbus = flixbusQuery (origInput.value, destInput.value, travelDate.value);
 })
 }
 
