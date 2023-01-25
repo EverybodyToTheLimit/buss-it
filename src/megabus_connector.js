@@ -26,7 +26,8 @@ let megabusQuery = async (originCity, destCity, date) => {
                     "destinationCity": obj.destination.cityName,
                     "destination": obj.destination.stopName,
                     "duration": obj.duration,
-                    "price": obj.price
+                    "price": obj.price,
+                    "carrier": "megabus"
                 }
                 megabusResult.push(resultEntry)
             }

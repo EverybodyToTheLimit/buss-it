@@ -3,6 +3,8 @@ import { flixbusCityIds } from "./city_ids";
 
 let flixbusQuery = async (originCity, destCity, date) => {
 
+        let flixbusResult = [];
+
         originCity = flixbusCityIds.find(item => item.name === originCity).id
         destCity = flixbusCityIds.find(item => item.name === destCity).id
         const axios = require("axios");
@@ -24,23 +26,29 @@ let flixbusQuery = async (originCity, destCity, date) => {
         }
         };
 
-        axios.request(options).then(function (response) {
-            console.log(response.data);
+        let result = await axios.request(options).then(async response => {
             
 
-            // for (let i=1; i<response.data.length; i++) {
-            //     let obj = response.data[i]
-            //     let resultEntry = {
-            //         "id": obj.departure.timestamp,
-            //         "departureTime": obj.departureDateTime,
-            //         "arrivalTime": obj.arrivalDateTime,
-            //         "originCity": obj.origin.cityName,
-            //         "origin": obj.origin.stopName,
-            //         "destinationCity": obj.destination.cityName,
-            //         "destination": obj.destination.stopName,
-            //         "duration": obj.duration,
-            //         "price": obj.price
-            //     }}
+            for (let i=0; i<response.data.length; i++) {
+                let obj = response.data[i]
+                for (let i=0; i<obj.items.length; i++) {
+                    let innerObj = obj.items[i]
+                    let resultEntry = {
+                        "id": innerObj.id,
+                        "departureTime": innerObj.departure.timestamp,
+                        "arrivalTime": innerObj.arrival.timestamp,
+                        "originCity": obj.from.name,
+                        "origin": obj.from.full_address,
+                        "destinationCity": obj.to.name,
+                        "destination": obj.to.full_address,
+                        "duration": innerObj.duration.hour + "h " + innerObj.duration.hour + "m",
+                        "price": innerObj.price_total_sum,
+                        "carrier": "flixbus"
+                    }
+                flixbusResult.push(resultEntry);
+                }
+            }
+            console.log(flixbusResult)
 
         }).catch(function (error) {
             console.error(error);
