@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;AACpB","sourcesContent":["#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  /* position: absolute; */\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;AACpB;;AAEA,IAAI,sBAAsB,EAAE;AAC5B;EACE,gBAAgB;AAClB;AACA;EACE,6CAA6C;EAC7C,kBAAkB;EAClB,qBAAqB;AACvB;AACA;EACE,6BAA6B;EAC7B,yBAAyB;EACzB,aAAa;EACb,eAAe;AACjB;AACA;EACE,yBAAyB;EACzB,WAAW;AACb;AACA;EACE,4BAA4B;EAC5B,WAAW;AACb;AACA;EACE,wBAAwB;EACxB,yBAAyB;EACzB,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;EACX,yEAAyE;EACzE,SAAS;EACT,OAAO;EACP,QAAQ;AACV;AACA;EACE,aAAa;EACb,eAAe;EACf,sBAAsB;EACtB,gCAAgC;AAClC;AACA;EACE,yBAAyB;EACzB,yBAAyB;AAC3B;AACA;EACE,0DAA0D;EAC1D,uCAAuC;EACvC,cAAc;AAChB","sourcesContent":["#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  /* position: absolute; */\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1403,7 +1403,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _src_event_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/event_handler */ "./src/event_handler.js");
 /* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
-/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+/* harmony import */ var _forms_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms_helpers */ "./src/forms_helpers.js");
+/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+
 
 
 
@@ -1427,11 +1429,13 @@ let searchSection = () => {
     origInput.type = "text"
     origInput.placeholder = "travelling from"
     origInput.required = true;
+    origInput.className = "autocomplete"
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
     destInput.placeholder = "travelling to"
     destInput.required = true;
+    destInput.className = "autocomplete"
     let travelDate = document.createElement('input');
     travelDate.name = "date"
     travelDate.type = "date"
@@ -1454,9 +1458,11 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_2__.megabusQuery)(origInput.value, destInput.value, travelDate.value);
+    let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_3__.megabusQuery)(origInput.value, destInput.value, travelDate.value);
     let resultFlixbus = (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_1__.flixbusQuery) (origInput.value, destInput.value, travelDate.value);
 })
+;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(origInput)
+;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(destInput)
 }
 
 
@@ -1601,6 +1607,130 @@ let flixbusQuery = async (originCity, destCity, date) => {
 // }
 
 
+
+/***/ }),
+
+/***/ "./src/forms_helpers.js":
+/*!******************************!*\
+  !*** ./src/forms_helpers.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "autocomplete": () => (/* binding */ autocomplete)
+/* harmony export */ });
+/* harmony import */ var _city_ids__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./city_ids */ "./src/city_ids.js");
+
+
+
+function autocomplete(inp) {
+
+    let arr = []
+
+       _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.forEach((el) => {
+        arr.push(el.name)
+       }) 
+       _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.forEach((el) => {
+        arr.push(el.name)
+       }) 
+    
+
+
+    var currentFocus;
+    inp.addEventListener("input", () => {
+        var a, b, i, val = inp.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false;}
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", inp.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        /*append the DIV element as a child of the autocomplete container:*/
+        inp.parentNode.appendChild(a);
+        /*for each item in the array...*/
+        for (i = 0; i < arr.length; i++) {
+          /*check if the item starts with the same letters as the text field value:*/
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            /*create a DIV element for each matching element:*/
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            /*insert a input field that will hold the current array item's value:*/
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", (e) => {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = e.currentTarget.innerText;
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", (e) => {
+        var x = document.getElementById(inp.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+          /*If the arrow DOWN key is pressed,
+          increase the currentFocus variable:*/
+          currentFocus++;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 38) { //up
+          /*If the arrow UP key is pressed,
+          decrease the currentFocus variable:*/
+          currentFocus--;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          e.preventDefault();
+          if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (x) x[currentFocus].click();
+          }
+        }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+  }
+
+  
 
 /***/ }),
 

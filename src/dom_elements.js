@@ -1,5 +1,6 @@
 import { clickHandler } from "../src/event_handler";
 import { flixbusQuery } from "./flixbus_connector";
+import { autocomplete } from "./forms_helpers";
 import { megabusQuery } from "./megabus_connector";
 
 let staticElements = () => {
@@ -21,11 +22,13 @@ let searchSection = () => {
     origInput.type = "text"
     origInput.placeholder = "travelling from"
     origInput.required = true;
+    origInput.className = "autocomplete"
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
     destInput.placeholder = "travelling to"
     destInput.required = true;
+    destInput.className = "autocomplete"
     let travelDate = document.createElement('input');
     travelDate.name = "date"
     travelDate.type = "date"
@@ -51,6 +54,8 @@ searchButton.addEventListener('click', (event) => {
     let result = megabusQuery(origInput.value, destInput.value, travelDate.value);
     let resultFlixbus = flixbusQuery (origInput.value, destInput.value, travelDate.value);
 })
+autocomplete(origInput)
+autocomplete(destInput)
 }
 
 
