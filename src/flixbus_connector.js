@@ -1,4 +1,5 @@
 import { flixbusCityIds } from "./city_ids";
+import { differenceInMinutes, fromUnixTime } from "date-fns";
 
 
 let flixbusQuery = async (originCity, destCity, date) => {
@@ -35,13 +36,13 @@ let flixbusQuery = async (originCity, destCity, date) => {
                     let innerObj = obj.items[i]
                     let resultEntry = {
                         "id": innerObj.id,
-                        "departureTime": innerObj.departure.timestamp,
-                        "arrivalTime": innerObj.arrival.timestamp,
+                        "departureTime": fromUnixTime(innerObj.departure.timestamp),
+                        "arrivalTime": fromUnixTime(innerObj.arrival.timestamp),
                         "originCity": obj.from.name,
                         "origin": obj.from.full_address,
                         "destinationCity": obj.to.name,
                         "destination": obj.to.full_address,
-                        "duration": innerObj.duration.hour + "h " + innerObj.duration.hour + "m",
+                        "duration": differenceInMinutes(fromUnixTime(innerObj.arrival.timestamp), fromUnixTime(innerObj.departure.timestamp)),
                         "price": innerObj.price_total_sum,
                         "carrier": "flixbus"
                     }

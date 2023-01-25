@@ -1,4 +1,5 @@
 import { megabusCityIds } from "./city_ids";
+import { differenceInMinutes, parseISO } from 'date-fns'
 
 
 let megabusQuery = async (originCity, destCity, date) => {
@@ -19,13 +20,13 @@ let megabusQuery = async (originCity, destCity, date) => {
                 let obj = text.journeys[i]
                 let resultEntry = {
                     "id": obj.journeyId,
-                    "departureTime": obj.departureDateTime,
-                    "arrivalTime": obj.arrivalDateTime,
+                    "departureTime": parseISO(obj.departureDateTime),
+                    "arrivalTime": parseISO(obj.arrivalDateTime),
                     "originCity": obj.origin.cityName,
                     "origin": obj.origin.stopName,
                     "destinationCity": obj.destination.cityName,
                     "destination": obj.destination.stopName,
-                    "duration": obj.duration,
+                    "duration": differenceInMinutes(parseISO(obj.arrivalDateTime), parseISO(obj.departureDateTime)),
                     "price": obj.price,
                     "carrier": "megabus"
                 }
