@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  /* position: absolute; */\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;AACpB;;AAEA,IAAI,sBAAsB,EAAE;AAC5B;EACE,gBAAgB;AAClB;AACA;EACE,6CAA6C;EAC7C,kBAAkB;EAClB,qBAAqB;AACvB;AACA;EACE,6BAA6B;EAC7B,yBAAyB;EACzB,aAAa;EACb,eAAe;AACjB;AACA;EACE,yBAAyB;EACzB,WAAW;AACb;AACA;EACE,4BAA4B;EAC5B,WAAW;AACb;AACA;EACE,wBAAwB;EACxB,yBAAyB;EACzB,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;EACX,yEAAyE;EACzE,SAAS;EACT,OAAO;EACP,QAAQ;AACV;AACA;EACE,aAAa;EACb,eAAe;EACf,sBAAsB;EACtB,gCAAgC;AAClC;AACA;EACE,yBAAyB;EACzB,yBAAyB;AAC3B;AACA;EACE,0DAA0D;EAC1D,uCAAuC;EACvC,cAAc;AAChB","sourcesContent":["#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  /* position: absolute; */\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete, .origin-div, .destination-div{\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  position: absolute;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  width: 150px;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;AACpB;;AAEA,IAAI,sBAAsB,EAAE;AAC5B;EACE,gBAAgB;AAClB;AACA;EACE,6CAA6C;EAC7C,kBAAkB;EAClB,qBAAqB;AACvB;AACA;EACE,6BAA6B;EAC7B,yBAAyB;EACzB,aAAa;EACb,eAAe;AACjB;AACA;EACE,yBAAyB;EACzB,WAAW;AACb;AACA;EACE,4BAA4B;EAC5B,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,yBAAyB;EACzB,mBAAmB;EACnB,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,yEAAyE;EACzE,SAAS;EACT,OAAO;EACP,QAAQ;AACV;AACA;EACE,aAAa;EACb,eAAe;EACf,sBAAsB;EACtB,gCAAgC;AAClC;AACA;EACE,yBAAyB;EACzB,yBAAyB;AAC3B;AACA;EACE,0DAA0D;EAC1D,uCAAuC;EACvC,cAAc;AAChB","sourcesContent":["#main {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\nform {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    gap: 10%;\n}\n\ninput {\n    min-width: 150px;\n}\n\nbutton {\n    min-width: 100px;\n}\n\n* { box-sizing: border-box; }\nbody {\n  font: 16px Arial;\n}\n.autocomplete, .origin-div, .destination-div{\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\ninput {\n  border: 1px solid transparent;\n  background-color: #f1f1f1;\n  padding: 10px;\n  font-size: 16px;\n}\ninput[type=text] {\n  background-color: #f1f1f1;\n  width: 100%;\n}\ninput[type=submit] {\n  background-color: DodgerBlue;\n  color: #fff;\n}\n.autocomplete-items {\n  position: absolute;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  width: 150px;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n}\n.autocomplete-items div {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1423,13 +1423,16 @@ let searchSection = () => {
 // both origin and destination should be select elements that feed from the object array in the connector
 
 // create form elements
-
+    let originDiv = document.createElement('div')
+    originDiv.className = "origin-div"
     let origInput = document.createElement('input');
     origInput.name = "origin"
     origInput.type = "text"
     origInput.placeholder = "travelling from"
     origInput.required = true;
     origInput.className = "autocomplete"
+    let destDiv = document.createElement('div')
+    destDiv.className = "destination-div"
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
@@ -1448,8 +1451,10 @@ let searchSection = () => {
 // append objects in DOM
 
     let main = document.getElementById("main")
-    newForm.appendChild(origInput);
-    newForm.appendChild(destInput);
+    originDiv.appendChild(origInput);
+    destDiv.appendChild(destInput);
+    newForm.appendChild(originDiv);
+    newForm.appendChild(destDiv);
     newForm.appendChild(travelDate);
     newForm.appendChild(searchButton);
     main.appendChild(newForm);
@@ -1628,12 +1633,16 @@ function autocomplete(inp) {
 
     let arr = []
 
+        // Get values from flixbus array
        _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.forEach((el) => {
         arr.push(el.name)
        }) 
+       // Get values from megabus array
        _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.forEach((el) => {
         arr.push(el.name)
        }) 
+       // Dedupe array
+       arr = [...new Set(arr)]
     
 
 
