@@ -56,8 +56,7 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let result = megabusQuery(origInput.value, destInput.value, travelDate.value);
-    let resultFlixbus = flixbusQuery (origInput.value, destInput.value, travelDate.value);
+    clickHandler("search", origInput.value, destInput.value, travelDate.value);
 })
 autocomplete(origInput)
 autocomplete(destInput)

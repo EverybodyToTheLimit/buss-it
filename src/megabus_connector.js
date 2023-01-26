@@ -39,6 +39,7 @@ let megabusQuery = async (originCity, destCity, date) => {
    catch (err) {
     console.log(err)
    }
+   return megabusResult;
 }
 
 

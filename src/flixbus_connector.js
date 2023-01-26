@@ -54,7 +54,7 @@ let flixbusQuery = async (originCity, destCity, date) => {
         }).catch(function (error) {
             console.error(error);
         })
-
+        return flixbusResult;
 };
 
 // one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 

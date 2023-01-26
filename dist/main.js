@@ -1463,8 +1463,7 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
-    let result = (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_3__.megabusQuery)(origInput.value, destInput.value, travelDate.value);
-    let resultFlixbus = (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_1__.flixbusQuery) (origInput.value, destInput.value, travelDate.value);
+    (0,_src_event_handler__WEBPACK_IMPORTED_MODULE_0__.clickHandler)("search", origInput.value, destInput.value, travelDate.value);
 })
 ;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(origInput)
 ;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(destInput)
@@ -1499,12 +1498,10 @@ __webpack_require__.r(__webpack_exports__);
 
 let clickHandler = async (clickOrigin, origin, destination, date) => {
     if (clickOrigin == "search") {
-    let resultMegabus = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery) (origin, destination, date)
-    let resultFlixbus = await (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_0__.flixbusQuery) (origin, destination, date)
-    return {
-        resultMegabus,
-        resultFlixbus
-    }
+    let resultMegabus = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery)(origin, destination, date);
+    let resultFlixbus = await (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_0__.flixbusQuery)(origin, destination, date);
+    let resultMerged = [...resultMegabus, ...resultFlixbus]
+    console.log(resultMerged)
     }
 }
 
@@ -1581,7 +1578,7 @@ let flixbusQuery = async (originCity, destCity, date) => {
         }).catch(function (error) {
             console.error(error);
         })
-
+        return flixbusResult;
 };
 
 // one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 
@@ -1797,6 +1794,7 @@ let megabusQuery = async (originCity, destCity, date) => {
    catch (err) {
     console.log(err)
    }
+   return megabusResult;
 }
 
 
