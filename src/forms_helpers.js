@@ -5,12 +5,16 @@ function autocomplete(inp) {
 
     let arr = []
 
+        // Get values from flixbus array
        flixbusCityIds.forEach((el) => {
         arr.push(el.name)
        }) 
+       // Get values from megabus array
        megabusCityIds.forEach((el) => {
         arr.push(el.name)
        }) 
+       // Dedupe array
+       arr = [...new Set(arr)]
     
 
 

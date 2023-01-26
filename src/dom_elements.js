@@ -16,13 +16,16 @@ let searchSection = () => {
 // both origin and destination should be select elements that feed from the object array in the connector
 
 // create form elements
-
+    let originDiv = document.createElement('div')
+    originDiv.className = "origin-div"
     let origInput = document.createElement('input');
     origInput.name = "origin"
     origInput.type = "text"
     origInput.placeholder = "travelling from"
     origInput.required = true;
     origInput.className = "autocomplete"
+    let destDiv = document.createElement('div')
+    destDiv.className = "destination-div"
     let destInput = document.createElement('input');
     destInput.name = "destination"
     destInput.type = "text"
@@ -41,8 +44,10 @@ let searchSection = () => {
 // append objects in DOM
 
     let main = document.getElementById("main")
-    newForm.appendChild(origInput);
-    newForm.appendChild(destInput);
+    originDiv.appendChild(origInput);
+    destDiv.appendChild(destInput);
+    newForm.appendChild(originDiv);
+    newForm.appendChild(destDiv);
     newForm.appendChild(travelDate);
     newForm.appendChild(searchButton);
     main.appendChild(newForm);
