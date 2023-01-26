@@ -1397,18 +1397,18 @@ let flixbusCityIds = [
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addResultDom": () => (/* binding */ addResultDom),
 /* harmony export */   "resultSection": () => (/* binding */ resultSection),
 /* harmony export */   "searchSection": () => (/* binding */ searchSection),
 /* harmony export */   "staticElements": () => (/* binding */ staticElements)
 /* harmony export */ });
 /* harmony import */ var _src_event_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/event_handler */ "./src/event_handler.js");
-/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
-/* harmony import */ var _forms_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms_helpers */ "./src/forms_helpers.js");
-/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+/* harmony import */ var _forms_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms_helpers */ "./src/forms_helpers.js");
 
 
 
 
+// build static elements
 
 let staticElements = () => {
     let main = document.createElement('div');
@@ -1459,23 +1459,68 @@ let searchSection = () => {
     newForm.appendChild(searchButton);
     main.appendChild(newForm);
 
-// create event listeners
+// create event listener for search button click and pass to click handler helper
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
     (0,_src_event_handler__WEBPACK_IMPORTED_MODULE_0__.clickHandler)("search", origInput.value, destInput.value, travelDate.value);
 })
-;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(origInput)
-;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_2__.autocomplete)(destInput)
+
+// call the autocomplete functionality for both city input fields
+;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_1__.autocomplete)(origInput)
+;(0,_forms_helpers__WEBPACK_IMPORTED_MODULE_1__.autocomplete)(destInput)
 }
 
-
+// create the main section for results 
 let resultSection = () => {
     let main = document.getElementById("main")
     let results = document.createElement('div');
     results.id = "results"
     main.appendChild(results)
 }
+
+// results builder helper called by the click handler
+
+let addResultDom = (obj) => {
+    let resultContainer = document.createElement('div')
+    resultContainer.id = obj.id
+    let departureTime = document.createElement('div')
+    departureTime.className = "departure-time"
+    departureTime.textContent = obj.departureTime
+    let arrivalTime = document.createElement('div')
+    arrivalTime.className = "arrival-time"
+    arrivalTime.textContent = obj.arrivalTime
+    let duration = document.createElement('div')
+    duration.className = "duration"
+    duration.textContent = obj.duration
+    let originCity = document.createElement('div')
+    originCity.className = "origin-city"
+    originCity.textContent = obj.originCity
+    let destinationCity = document.createElement('div')
+    destinationCity.className = "destination-city"
+    destinationCity.textContent = obj.destinationCity
+    let destination = document.createElement('div')
+    destination.className = "destination"
+    destination.textContent = obj.destination
+    let origin = document.createElement('div')
+    origin.className = "origin"
+    origin.textContent = obj.origin
+    let price = document.createElement('div')
+    price.className = "price"
+    price.textContent = obj.price
+
+    let results = document.getElementById("results")
+    resultContainer.appendChild(departureTime)
+    resultContainer.appendChild(arrivalTime)
+    resultContainer.appendChild(duration)
+    resultContainer.appendChild(originCity)
+    resultContainer.appendChild(origin)
+    resultContainer.appendChild(destinationCity)
+    resultContainer.appendChild(destination)
+    resultContainer.appendChild(price)
+    results.appendChild(resultContainer)
+}
+
 
 
 
@@ -1491,17 +1536,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "clickHandler": () => (/* binding */ clickHandler)
 /* harmony export */ });
-/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
-/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+/* harmony import */ var _dom_elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom_elements */ "./src/dom_elements.js");
+/* harmony import */ var _flixbus_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flixbus_connector */ "./src/flixbus_connector.js");
+/* harmony import */ var _megabus_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./megabus_connector */ "./src/megabus_connector.js");
+
+
 
 
 
 let clickHandler = async (clickOrigin, origin, destination, date) => {
+        //trigger on search query
     if (clickOrigin == "search") {
-    let resultMegabus = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_1__.megabusQuery)(origin, destination, date);
-    let resultFlixbus = await (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_0__.flixbusQuery)(origin, destination, date);
+        //get connection details in arrays
+    let resultMegabus = await (0,_megabus_connector__WEBPACK_IMPORTED_MODULE_2__.megabusQuery)(origin, destination, date);
+    let resultFlixbus = await (0,_flixbus_connector__WEBPACK_IMPORTED_MODULE_1__.flixbusQuery)(origin, destination, date);
+        //merge arrays
     let resultMerged = [...resultMegabus, ...resultFlixbus]
+        //sort results by price ascending
+    resultMerged.sort((a,b) => a.price - b.price);
+        //call dom helper to draw each object
     console.log(resultMerged)
+    resultMerged.forEach(_dom_elements__WEBPACK_IMPORTED_MODULE_0__.addResultDom)
     }
 }
 
@@ -1530,10 +1585,12 @@ let flixbusQuery = async (originCity, destCity, date) => {
 
         let flixbusResult = [];
 
+        //convert search city to flixbus city code
         originCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.find(item => item.name === originCity).id
         destCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.flixbusCityIds.find(item => item.name === destCity).id
+        
+        //build rapidapi API query string with the required parameters. API key exposed but free
         const axios = __webpack_require__(/*! axios */ "./node_modules/axios/dist/browser/axios.cjs");
-
         const options = {
         method: 'GET',
         url: 'https://flixbus.p.rapidapi.com/v1/search-trips',
@@ -1551,15 +1608,18 @@ let flixbusQuery = async (originCity, destCity, date) => {
         }
         };
 
-        let result = await axios.request(options).then(async response => {
-            
-
+        //call axios request and wait for result
+        await axios.request(options).then(async response => {
+        console.log(response.data)
+            //itirate through the result and add to new array
             for (let i=0; i<response.data.length; i++) {
                 let obj = response.data[i]
                 for (let i=0; i<obj.items.length; i++) {
+                    //nested object array mapping        
                     let innerObj = obj.items[i]
                     let resultEntry = {
-                        "id": innerObj.id,
+                        "id": innerObj.uid,
+                        //parse the dates into objects and convert duration to minutes
                         "departureTime": (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(innerObj.departure.timestamp),
                         "arrivalTime": (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(innerObj.arrival.timestamp),
                         "originCity": obj.from.name,
@@ -1570,6 +1630,7 @@ let flixbusQuery = async (originCity, destCity, date) => {
                         "price": innerObj.price_total_sum,
                         "carrier": "flixbus"
                     }
+                //build each line of the result array
                 flixbusResult.push(resultEntry);
                 }
             }
@@ -1646,83 +1707,79 @@ function autocomplete(inp) {
     var currentFocus;
     inp.addEventListener("input", () => {
         var a, b, i, val = inp.value;
-        /*close any already open lists of autocompleted values*/
+        // close any already open lists of autocompleted value
         closeAllLists();
         if (!val) { return false;}
         currentFocus = -1;
-        /*create a DIV element that will contain the items (values):*/
+        // create a DIV element that will contain the items (values)
         a = document.createElement("DIV");
         a.setAttribute("id", inp.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
-        /*append the DIV element as a child of the autocomplete container:*/
+        // append the DIV element as a child of the autocomplete container
         inp.parentNode.appendChild(a);
-        /*for each item in the array...*/
+        // for each item in the array..
         for (i = 0; i < arr.length; i++) {
-          /*check if the item starts with the same letters as the text field value:*/
+          // check if the item starts with the same letters as the text field value
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            /*create a DIV element for each matching element:*/
+            // create a DIV element for each matching element
             b = document.createElement("DIV");
-            /*make the matching letters bold:*/
+            // make the matching letters bold
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
-            /*insert a input field that will hold the current array item's value:*/
+            // insert a input field that will hold the current array item's value
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            /*execute a function when someone clicks on the item value (DIV element):*/
+            // execute a function when someone clicks on the item value (DIV element)
                 b.addEventListener("click", (e) => {
-                /*insert the value for the autocomplete text field:*/
+                // insert the value for the autocomplete text field
                 inp.value = e.currentTarget.innerText;
-                /*close the list of autocompleted values,
-                (or any other open lists of autocompleted values:*/
+                // close the list of autocompleted values, (or any other open lists of autocompleted values
                 closeAllLists();
             });
             a.appendChild(b);
           }
         }
     });
-    /*execute a function presses a key on the keyboard:*/
+    // execute a function presses a key on the keyboard
     inp.addEventListener("keydown", (e) => {
         var x = document.getElementById(inp.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
-          /*If the arrow DOWN key is pressed,
-          increase the currentFocus variable:*/
+          // If the arrow DOWN key is pressed, increase the currentFocus variable
           currentFocus++;
-          /*and and make the current item more visible:*/
+          // and and make the current item more visible
           addActive(x);
         } else if (e.keyCode == 38) { //up
-          /*If the arrow UP key is pressed,
-          decrease the currentFocus variable:*/
+          // If the arrow UP key is pressed, decrease the currentFocus variable
           currentFocus--;
-          /*and and make the current item more visible:*/
+          // and and make the current item more visible
           addActive(x);
         } else if (e.keyCode == 13) {
-          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          // If the ENTER key is pressed, prevent the form from being submitted
           e.preventDefault();
           if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
+            // and simulate a click on the "active" item
             if (x) x[currentFocus].click();
           }
         }
     });
     function addActive(x) {
-      /*a function to classify an item as "active":*/
+      // a function to classify an item as "active":*/
       if (!x) return false;
-      /*start by removing the "active" class on all items:*/
+      // start by removing the "active" class on all items:*/
       removeActive(x);
       if (currentFocus >= x.length) currentFocus = 0;
       if (currentFocus < 0) currentFocus = (x.length - 1);
-      /*add class "autocomplete-active":*/
+      // add class "autocomplete-active":*/
       x[currentFocus].classList.add("autocomplete-active");
     }
     function removeActive(x) {
-      /*a function to remove the "active" class from all autocomplete items:*/
+      // a function to remove the "active" class from all autocomplete items:*/
       for (var i = 0; i < x.length; i++) {
         x[i].classList.remove("autocomplete-active");
       }
     }
     function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
+      // close all autocomplete lists in the document, except the one passed as an argument
       var x = document.getElementsByClassName("autocomplete-items");
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
@@ -1730,7 +1787,7 @@ function autocomplete(inp) {
       }
     }
   }
-  /*execute a function when someone clicks in the document:*/
+  // execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
@@ -1763,17 +1820,20 @@ let megabusQuery = async (originCity, destCity, date) => {
     // map city names to Megabus codes from array
     originCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.find(item => item.name === originCity).id
     destCity = _city_ids__WEBPACK_IMPORTED_MODULE_0__.megabusCityIds.find(item => item.name === destCity).id
-    // build main API connection string
+    // build main API connection string and fetch result JSON
     let result = await fetch("https://proxy.cors.sh/https://uk.megabus.com/journey-planner/api/journeys?days=1&concessionCount=0&departureDate="+ date +"&destinationId="+destCity+"&inboundOtherDisabilityCount=0&inboundPcaCount=0&inboundWheelchairSeated=0&nusCount=0&originId="+originCity+"&otherDisabilityCount=0&pcaCount=0&totalPassengers=1", {
         headers: {
           'x-cors-api-key': 'temp_cf1616c81b1fb0a232d4a95971a6aec7',
         }
         })
+        //await response
         .then(async response => {
             let text = await response.json();
+            // itirate through JSON objects and add to result array 
             for (let i=1; i<text.journeys.length; i++) {
                 let obj = text.journeys[i]
                 let resultEntry = {
+                    // parse data strings into objects, calculate duration in minutes
                     "id": obj.journeyId,
                     "departureTime": (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(obj.departureDateTime),
                     "arrivalTime": (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(obj.arrivalDateTime),
@@ -1785,6 +1845,7 @@ let megabusQuery = async (originCity, destCity, date) => {
                     "price": obj.price,
                     "carrier": "megabus"
                 }
+                // push parsed item into result array
                 megabusResult.push(resultEntry)
             }
             console.log(megabusResult)
@@ -1809,7 +1870,7 @@ let megabusQuery = async (originCity, destCity, date) => {
 // }
 
 let validateMegabusInput = (originCity, destCity, date) => {
-    //add calidation steps, date cannot be in the past, format date with datefns yyyy-mm-dd
+    //add validation steps, date cannot be in the past, format date with datefns yyyy-mm-dd
 
 }
 
