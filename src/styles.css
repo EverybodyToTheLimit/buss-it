@@ -70,3 +70,33 @@ input[type=submit] {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+#results {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.result-container {
+    display:flex;
+    flex-direction: row;
+    transition: border-color 175ms 0ms ease-in,background-color 175ms 0ms ease-out,border-radius 250ms 0ms ease-in,box-shadow 250ms 0ms ease-in;
+    border-radius: 18px;
+    background-color: #ffffff;
+    border: 1px solid #d7d8d9;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+}
+
+.details-div {
+    display:flex;
+    flex-direction: column;
+    padding: 20px;
+    flex: 1;
+}
+
+.details-top-div, .details-mid-div, .details-bottom-div{
+    display:flex;
+    direction:row;
+    justify-content: space-between;
+}

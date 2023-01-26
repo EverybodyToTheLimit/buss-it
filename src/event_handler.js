@@ -4,6 +4,7 @@ import { megabusQuery } from "./megabus_connector"
 
 
 let clickHandler = async (clickOrigin, origin, destination, date) => {
+    try {
         //trigger on search query
     if (clickOrigin == "search") {
         //get connection details in arrays
@@ -16,6 +17,10 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
         //call dom helper to draw each object
     console.log(resultMerged)
     resultMerged.forEach(addResultDom)
+    }
+    }
+    catch (error) {
+        console.log(error)
     }
 }
 

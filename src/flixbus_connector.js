@@ -3,7 +3,7 @@ import { differenceInMinutes, fromUnixTime } from "date-fns";
 
 
 let flixbusQuery = async (originCity, destCity, date) => {
-
+    try {
         let flixbusResult = [];
 
         //convert search city to flixbus city code
@@ -61,6 +61,10 @@ let flixbusQuery = async (originCity, destCity, date) => {
             console.error(error);
         })
         return flixbusResult;
+    }
+    catch(error) {
+        console.log(error)
+    }
 };
 
 // one off script to populate the cities with codes. Future feature maybe automatic at start of the session? 
