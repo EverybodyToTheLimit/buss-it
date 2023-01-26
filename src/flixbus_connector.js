@@ -6,10 +6,12 @@ let flixbusQuery = async (originCity, destCity, date) => {
 
         let flixbusResult = [];
 
+        //convert search city to flixbus city code
         originCity = flixbusCityIds.find(item => item.name === originCity).id
         destCity = flixbusCityIds.find(item => item.name === destCity).id
+        
+        //build rapidapi API query string with the required parameters. API key exposed but free
         const axios = require("axios");
-
         const options = {
         method: 'GET',
         url: 'https://flixbus.p.rapidapi.com/v1/search-trips',
@@ -27,15 +29,18 @@ let flixbusQuery = async (originCity, destCity, date) => {
         }
         };
 
-        let result = await axios.request(options).then(async response => {
-            
-
+        //call axios request and wait for result
+        await axios.request(options).then(async response => {
+        console.log(response.data)
+            //itirate through the result and add to new array
             for (let i=0; i<response.data.length; i++) {
                 let obj = response.data[i]
                 for (let i=0; i<obj.items.length; i++) {
+                    //nested object array mapping        
                     let innerObj = obj.items[i]
                     let resultEntry = {
-                        "id": innerObj.id,
+                        "id": innerObj.uid,
+                        //parse the dates into objects and convert duration to minutes
                         "departureTime": fromUnixTime(innerObj.departure.timestamp),
                         "arrivalTime": fromUnixTime(innerObj.arrival.timestamp),
                         "originCity": obj.from.name,
@@ -46,6 +51,7 @@ let flixbusQuery = async (originCity, destCity, date) => {
                         "price": innerObj.price_total_sum,
                         "carrier": "flixbus"
                     }
+                //build each line of the result array
                 flixbusResult.push(resultEntry);
                 }
             }
