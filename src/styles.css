@@ -96,6 +96,7 @@ input[type=submit] {
     flex-direction: column;
     padding: 20px;
     flex: 1;
+    position:relative
 }
 
 .details-top-div, .details-mid-div, .details-bottom-div{
@@ -162,7 +163,6 @@ input[type=submit] {
 }
 
 body {
-    min-width: 350px;
     background-color: #F5F5F5;
 }
 
@@ -261,6 +261,7 @@ body {
 }
 
 .hint {
+  padding-left: 10px;
   font-size: 10px;
   font-weight: bold;
   animation: shake .3s;
@@ -271,4 +272,10 @@ body {
  25% { transform: translateX(4px) }
 50% { transform: translateX(-4px) }
 75% { transform: translateX(4px) }
+}
+
+.carrier-label {
+  position: absolute;
+  width: 120px;
+  margin-left: 100px;
 }

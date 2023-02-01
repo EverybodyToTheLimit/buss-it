@@ -1,19 +1,46 @@
 import { flixbusCityIds, megabusCityIds } from "./city_ids";
 
+let checkAutocomplete = (value) => {
+  let mergedArray = [...megabusCityIds, ...flixbusCityIds]
+  let result = false
+  for (let i=0; i<mergedArray.length; i++) {
+    if (value == mergedArray[i].name) {
+      result = true
+      return true
+    }
+    else {
+      result = false
+    }
+  }
+  return result
+}
+
 let validateForm = () => {
-  let modalFormProjectName = document.getElementById("origin")
+  let formOrigin = document.getElementById("origin")
+  let formDestination = document.getElementById("destination")
   let dueDate = document.getElementById("date")
   let hint = document.querySelector(".hint")
+
   if (hint !== null) {hint.remove()}
 
-      if (modalFormProjectName.value == "") {
-      modalFormProjectName.classList.add("invalid")
+
+      if (formOrigin.value == "" || !checkAutocomplete(formOrigin.value)) {
+      formOrigin.classList.add("invalid")
       let hintDev = document.createElement('div');
-      hintDev.textContent = "Title cannot be empty"
+      hintDev.textContent = "Please select a station from the list"
       hintDev.classList.add("hint")
-      modalFormProjectName.parentNode.insertBefore(hintDev, modalFormProjectName.nextSibling)
+      formOrigin.parentNode.insertBefore(hintDev, formOrigin.nextSibling)
       return false
       }
+
+      else if (formDestination.value == "" || !checkAutocomplete(formDestination.value)) {
+        formDestination.classList.add("invalid")
+        let hintDev2 = document.createElement('div');
+        hintDev2.textContent = "Please select a station from the list"
+        hintDev2.classList.add("hint")
+        formDestination.parentNode.insertBefore(hintDev2, formDestination.nextSibling)
+        return false
+        }
 
       else if (dueDate !== null && dueDate.value == "") {
       dueDate.classList.add("invalid")

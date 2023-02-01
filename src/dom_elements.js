@@ -1,7 +1,8 @@
 import { parse, format } from "date-fns";
 import { clickHandler } from "../src/event_handler";
 import { validateForm, autocomplete } from "./forms_helpers";
-
+import flixbus from "./flixbus.png"
+import megabus from "./megabus.png"
 
 // build static elements
 
@@ -122,6 +123,14 @@ let addResultDom = (obj) => {
     let price = document.createElement('div')
     price.className = "price"
     price.textContent = "£" + obj.price
+    let carrier = document.createElement('img')
+    carrier.className = "carrier-label"
+    if (obj.carrier == "megabus") {
+        carrier.src = megabus
+    }
+    else {
+    carrier.src = flixbus
+    }
 
     let results = document.getElementById("results")
 
@@ -137,6 +146,7 @@ let addResultDom = (obj) => {
     detailsDiv.appendChild(detailsBottomDiv)
     resultContainer.appendChild(detailsDiv)
     resultContainer.appendChild(price)
+    resultContainer.appendChild(carrier)
     results.appendChild(resultContainer)
 }
 
