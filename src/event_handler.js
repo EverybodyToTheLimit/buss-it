@@ -1,4 +1,4 @@
-import { addResultDom } from "./dom_elements";
+import { clearMainScreen, addResultDom } from "./dom_elements";
 import { flixbusQuery } from "./flixbus_connector"
 import { megabusQuery } from "./megabus_connector"
 
@@ -25,6 +25,8 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
         //call dom helper to draw each object
     console.log(resultMerged)
     resultMerged.forEach(addResultDom)
+    clearMainScreen();
+    
     }
     }
     }

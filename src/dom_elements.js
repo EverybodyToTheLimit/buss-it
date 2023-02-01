@@ -1,6 +1,6 @@
 import { parse, format } from "date-fns";
 import { clickHandler } from "../src/event_handler";
-import { autocomplete } from "./forms_helpers";
+import { validateForm, autocomplete } from "./forms_helpers";
 
 
 // build static elements
@@ -22,6 +22,7 @@ let searchSection = () => {
     originDiv.className = "origin-div"
     let origInput = document.createElement('input');
     origInput.name = "origin"
+    origInput.id = "origin"
     origInput.type = "text"
     origInput.autocomplete = "off"
     origInput.placeholder = "travelling from"
@@ -31,6 +32,7 @@ let searchSection = () => {
     destDiv.className = "destination-div"
     let destInput = document.createElement('input');
     destInput.name = "destination"
+    destInput.id = "destination"
     destInput.type = "text"
     destInput.autocomplete = "off"
     destInput.placeholder = "travelling to"
@@ -38,6 +40,7 @@ let searchSection = () => {
     destInput.className = "autocomplete"
     let travelDate = document.createElement('input');
     travelDate.name = "date"
+    travelDate.id = "date"
     travelDate.type = "date"
     travelDate.placeholder = "yyyy-mm-dd"
     travelDate.required = true;
@@ -60,7 +63,12 @@ let searchSection = () => {
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
+    if (!validateForm()) {
+        return
+    } else {
+    loadingMainScreen();
     clickHandler("search", origInput.value, destInput.value, travelDate.value);
+    }
 })
 
 // call the autocomplete functionality for both city input fields
@@ -132,10 +140,22 @@ let addResultDom = (obj) => {
     results.appendChild(resultContainer)
 }
 
+let loadingMainScreen = () => {
+    let results = document.getElementById("results")
+    results.innerHTML = ""
+    results.className = "loader"
+}
+
+let clearMainScreen = () => {
+    let results = document.getElementById("results")
+    results.className = ""
+}
+
 
 export {
     staticElements,
     searchSection,
     resultSection,
-    addResultDom
+    addResultDom,
+    clearMainScreen
 }

@@ -1,5 +1,33 @@
 import { flixbusCityIds, megabusCityIds } from "./city_ids";
 
+let validateForm = () => {
+  let modalFormProjectName = document.getElementById("origin")
+  let dueDate = document.getElementById("date")
+  let hint = document.querySelector(".hint")
+  if (hint !== null) {hint.remove()}
+
+      if (modalFormProjectName.value == "") {
+      modalFormProjectName.classList.add("invalid")
+      let hintDev = document.createElement('div');
+      hintDev.textContent = "Title cannot be empty"
+      hintDev.classList.add("hint")
+      modalFormProjectName.parentNode.insertBefore(hintDev, modalFormProjectName.nextSibling)
+      return false
+      }
+
+      else if (dueDate !== null && dueDate.value == "") {
+      dueDate.classList.add("invalid")
+      let hintDev1 = document.createElement('div');
+      hintDev1.textContent = "Please enter a valid date"
+      hintDev1.classList.add("hint")
+      dueDate.parentNode.insertBefore(hintDev1, dueDate.nextSibling)
+      return false
+      }
+      
+      else {
+          return true
+      }
+}
 
 function autocomplete(inp) {
 
@@ -107,4 +135,6 @@ function autocomplete(inp) {
   });
   }
 
-  export {autocomplete}
+  export {autocomplete,
+          validateForm
+        }

@@ -36,7 +36,7 @@ let megabusQuery = async (originCity, destCity, date) => {
                     "destinationCity": obj.destination.cityName,
                     "destination": obj.destination.stopName,
                     "duration": differenceInMinutes(parseISO(obj.arrivalDateTime), parseISO(obj.departureDateTime)),
-                    "price": obj.price,
+                    "price": (Math.round(obj.price * 100) / 100).toFixed(2),
                     "carrier": "megabus"
                 }
                 // push parsed item into result array
