@@ -3,6 +3,7 @@ import { clickHandler } from "../src/event_handler";
 import { validateForm, autocomplete } from "./forms_helpers";
 import flixbus from "./flixbus.png"
 import megabus from "./megabus.png"
+import logo_image from "./bus_logo3.png"
 
 // build static elements
 
@@ -13,8 +14,16 @@ let staticElements = () => {
 }
 
 let searchSection = () => {
+    let logo = document.createElement('img');
+    logo.className = "logo"
+    logo.src = logo_image
     let newForm = document.createElement('FORM');
     newForm.action = "#"
+    let searchContainer = document.createElement('div')
+    searchContainer.className = "search-container"
+    let searchDiv = document.createElement('div')
+    searchDiv.className = "search-div"
+
 
 // both origin and destination should be select elements that feed from the object array in the connector
 
@@ -54,10 +63,13 @@ let searchSection = () => {
     let main = document.getElementById("main")
     originDiv.appendChild(origInput);
     destDiv.appendChild(destInput);
-    newForm.appendChild(originDiv);
-    newForm.appendChild(destDiv);
-    newForm.appendChild(travelDate);
-    newForm.appendChild(searchButton);
+    searchContainer.appendChild(originDiv);
+    searchContainer.appendChild(destDiv);
+    searchContainer.appendChild(travelDate);
+    searchDiv.appendChild(searchButton);
+    newForm.appendChild(searchContainer)
+    newForm.appendChild(searchDiv)
+    main.appendChild(logo);
     main.appendChild(newForm);
 
 // create event listener for search button click and pass to click handler helper
