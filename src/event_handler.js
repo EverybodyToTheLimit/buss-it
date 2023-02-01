@@ -1,4 +1,4 @@
-import { clearMainScreen, addResultDom } from "./dom_elements";
+import { emptyResults, clearMainScreen, addResultDom } from "./dom_elements";
 import { flixbusQuery } from "./flixbus_connector"
 import { megabusQuery } from "./megabus_connector"
 
@@ -12,7 +12,8 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
     let resultFlixbus = await flixbusQuery(origin, destination, date);
         //check for empties
     if (resultFlixbus == false && resultMegabus == false) {
-        console.log("No results found")
+        clearMainScreen();
+        emptyResults();
     }
     else {
         if (resultFlixbus == false) {resultFlixbus = []}

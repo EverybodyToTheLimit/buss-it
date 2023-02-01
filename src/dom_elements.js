@@ -85,6 +85,22 @@ let resultSection = () => {
     main.appendChild(results)
 }
 
+// empty result builder helper called by click handler
+
+let emptyResults = () => {
+    let resultContainer = document.createElement('div')
+    resultContainer.className = "result-container"
+    let detailsDiv = document.createElement('div')
+    detailsDiv.className = "details-div"
+    let detailsMidDiv = document.createElement('div')
+    detailsMidDiv.className = "details-mid-div"
+    detailsMidDiv.textContent = "No results found. Please try a different date or city"
+    let results = document.getElementById("results")
+    detailsDiv.appendChild(detailsMidDiv);
+    resultContainer.appendChild(detailsDiv);
+    results.appendChild(resultContainer);
+}
+
 // results builder helper called by the click handler
 
 let addResultDom = (obj) => {
@@ -167,5 +183,6 @@ export {
     searchSection,
     resultSection,
     addResultDom,
-    clearMainScreen
+    clearMainScreen,
+    emptyResults
 }
