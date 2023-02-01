@@ -6,8 +6,14 @@ let megabusQuery = async (originCity, destCity, date) => {
     let megabusResult = [];
    try {
     // map city names to Megabus codes from array
+    if (megabusCityIds.find(item => item.name === originCity) !== undefined && megabusCityIds.find(item => item.name === destCity) !== undefined) {
     originCity = megabusCityIds.find(item => item.name === originCity).id
     destCity = megabusCityIds.find(item => item.name === destCity).id
+    }
+    else {
+        return false
+    }
+
     // build main API connection string and fetch result JSON
     let result = await fetch("https://proxy.cors.sh/https://uk.megabus.com/journey-planner/api/journeys?days=1&concessionCount=0&departureDate="+ date +"&destinationId="+destCity+"&inboundOtherDisabilityCount=0&inboundPcaCount=0&inboundWheelchairSeated=0&nusCount=0&originId="+originCity+"&otherDisabilityCount=0&pcaCount=0&totalPassengers=1", {
         headers: {

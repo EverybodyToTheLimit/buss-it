@@ -10,6 +10,14 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
         //get connection details in arrays
     let resultMegabus = await megabusQuery(origin, destination, date);
     let resultFlixbus = await flixbusQuery(origin, destination, date);
+        //check for empties
+    if (resultFlixbus == false && resultMegabus == false) {
+        console.log("No results found")
+    }
+    else {
+        if (resultFlixbus == false) {resultFlixbus = []}
+        else if (resultMegabus == false) {resultMegabus = []}
+
         //merge arrays
     let resultMerged = [...resultMegabus, ...resultFlixbus]
         //sort results by price ascending
@@ -17,6 +25,7 @@ let clickHandler = async (clickOrigin, origin, destination, date) => {
         //call dom helper to draw each object
     console.log(resultMerged)
     resultMerged.forEach(addResultDom)
+    }
     }
     }
     catch (error) {

@@ -92,13 +92,13 @@ let addResultDom = (obj) => {
     detailsBottomDiv.className = "details-bottom-div"
     let departureTime = document.createElement('div')
     departureTime.className = "departure-time"
-    departureTime.textContent = format(obj.departureTime, "H:m");
+    departureTime.textContent = format(obj.departureTime, "H:mm");
     let arrivalTime = document.createElement('div')
     arrivalTime.className = "arrival-time"
-    arrivalTime.textContent = format(obj.arrivalTime, "H:m");
+    arrivalTime.textContent = format(obj.arrivalTime, "H:mm");
     let duration = document.createElement('div')
     duration.className = "duration"
-    duration.textContent = Math.trunc((obj.duration / 60)) + "h " + (obj.duration % 60) + "m" 
+    duration.textContent = Math.trunc((obj.duration / 60)) + "h " + (obj.duration  % 60) + "m" 
     let originCity = document.createElement('div')
     originCity.className = "origin-city"
     originCity.textContent = obj.originCity
@@ -113,7 +113,7 @@ let addResultDom = (obj) => {
     origin.textContent = obj.origin
     let price = document.createElement('div')
     price.className = "price"
-    price.textContent = obj.price
+    price.textContent = "£" + obj.price
 
     let results = document.getElementById("results")
 

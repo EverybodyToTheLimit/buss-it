@@ -7,8 +7,13 @@ let flixbusQuery = async (originCity, destCity, date) => {
         let flixbusResult = [];
 
         //convert search city to flixbus city code
-        originCity = flixbusCityIds.find(item => item.name === originCity).id
-        destCity = flixbusCityIds.find(item => item.name === destCity).id
+        if (flixbusCityIds.find(item => item.name === originCity) !== undefined && flixbusCityIds.find(item => item.name === destCity) !== undefined) {
+            originCity = flixbusCityIds.find(item => item.name === originCity).id
+            destCity = flixbusCityIds.find(item => item.name === destCity).id
+            }
+            else {
+                return false
+            }
         
         //build rapidapi API query string with the required parameters. API key exposed but free
         const axios = require("axios");
